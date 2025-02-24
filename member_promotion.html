@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	
+	
+	<style type="text/css">
+	body {
+  background-color: #e7e7e7;
+  color: #777;  
+}
+  .box {
+  -webkit-transition: 0.3s box-shadow ease;
+  transition: 0.3s box-shadow ease;
+  border-radius: 6px;
+  max-width: 100%;
+  background: #fff;
+  margin-top:40px;
+  margin-bottom: 40px;
+  margin-right: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);	  
+}
+.box:hover {
+ box-shadow: 0 12px 23px rgba(0, 0, 0, 0.23), 0 10px 10px rgba(0, 0, 0, 0.19);
+}
+
+.box-content {
+padding: 20px 20px 20px 20px;
+}
+
+.myButton {
+	box-shadow: 0px 0px 0px 0px #54a3f7;
+	background-color:#007dc1;
+	border-radius:10px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:19px;
+	padding:12px 37px;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #154682;
+	margin-bottom:20px;
+}
+.myButton:hover {
+	background-color:#0061a7;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+	</style>
+</head>
+<body><div class="card card-success">
+  <div class="card-header ">
+    <h3 class="card-title text-black">#_affiliate_url#</h3>
+    <div class="card-tools">
+      <button type="button" class="btn btn-tool" data-card-widget="collapse"> <i class="fas fa-minus"></i></button>
+    </div>
+  </div>
+  <div class="card-body">
+      <div class="table-responsive">
+    <table border="0" cellpadding="2" width="100%">
+      <tbody>
+        <tr>
+          <td align="left" valign="top" width="60%">#_affiliate_url#: 
+            
+            {$ref = get_affiliate_url(set_refid($member.userid))} <a href="{$ref}" style="text-decoration: none">{$ref}</a></td>
+        </tr>
+        <tr>
+          <td align="left" valign="top" width="60%">#_web_hits#: <font color="#FF0000">{$member.stats}</font></td>
+        </tr>
+      {if $config.pdf_enable}
+      <tr>
+        <td align="left" width="99%">#_viral_ebook#: 
+          
+          {$vpdf = get_viralpdf_url(set_refid($member.userid))} <a href="{$vpdf}" style="text-decoration: none"> {$vpdf}</a></td>
+      </tr>
+      {/if}
+        </tbody>
+      
+    </table>
+    </div>
+    
+    <p></p>
+  </div>
+</div>
+
+{if $content_pages}
+<div class="card card-info">
+  <div class="card-header">
+    <h3 class="card-title text-black">#_landing_pages#</h3>
+    <div class="card-tools">
+      <button type="button" class="btn btn-tool" data-card-widget="collapse"> <i class="fas fa-minus"></i></button>
+    </div>
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body">
+      <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th style="width: 10px">#</th>
+          <th>#_page_name#</th>
+          <th>#_page_url#</th>
+        </tr>
+      </thead>
+      {foreach from=$content_pages key=k item=v}
+      <tr>
+        <td align="center" width="50">{$k}</td>
+        <td>{$v.page_name}</td>
+        <td><a target="_blank" href="{$v.url}">{$v.url}</a></td>
+      </tr>
+      {/foreach}
+    </table>
+    </div>
+  </div>
+</div>
+{/if} 
+
+
+{if $content_banners}
+<div class="card card-danger">
+  <div class="card-header">
+    <h3 class="card-title text-black">#_promotion_banners#</h3>
+    <div class="card-tools">
+      <button type="button" class="btn btn-tool" data-card-widget="collapse"> <i class="fas fa-minus"></i></button>
+    </div>
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body">
+    <div class="table-responsive"> {foreach from=$content_banners key=k item=v}
+      <div class="callout callout-success">
+        <div class="pb-2"><img src="{$v.img}" /></div>
+        <pre class="form-control" style="height: 50px;" ><span id="the-content-{$k}">{$v.href}</span></pre>
+        <div class="text-left "> <a href="javascript:void(0); " class="btn btn-sm btn-info text-white" onclick="copyToClipboard('#the-content-{$k}')" title="Copy to clipboard"> <i class="fas fa-copy "></i> #_copy# </a> </div>
+      </div>
+      {/foreach} </div>
+  </div>
+</div>
+{/if}
+
+</body>
+</html>
+
